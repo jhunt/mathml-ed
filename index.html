@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>&lt;math&gt; &rarr; vim</title>
+<style>
+body, input, textarea {
+  background-color: #111;
+  color: #fff;
+}
+a {
+  color: yellow;
+  text-decoration: none;
+}
+label {
+  color: lime;
+}
+input, textarea {
+  outline: none;
+  border: 1px solid #767;
+}
+main {
+  display: block;
+  margin: 1em auto;
+  width: 60vw;
+  box-sizing: border-box;
+}
+h1 {
+  font-family: monospace;
+  font-size: 18pt;
+  text-align: right;
+}
+label {
+  display: block;
+  width: 100%;
+  font-size: 10pt;
+  font-family: sans-serif;
+}
+#m, #t {
+  display: block;
+  width: 100%;
+  margin: 0 0 1em 0;
+  font-size: 12pt;
+}
+#t {
+  font-size: 18pt;
+  padding: 8pt;
+}
+#m {
+  height: 15em;
+  padding: 1em;
+}
+#r {
+  text-align: center;
+  margin: 2em;
+  min-height: 4em;
+  font-size: 18pt;
+}
+
+body {
+  margin-bottom: 20pt;
+}
+footer {
+  height: 20pt;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  font-size: 10pt;
+  opacity: 0.7;
+  font-family: sans-serif;
+}
+</style>
+</head>
+<body>
+<main>
+<h1>&lt;math&gt;</h1>
+<label>name this snippet / session</label>
+<input type="text" id="t">
+<label>write your mathmL in this big text box</label>
+<textarea id="m"></textarea>
+<label>... and watch it render below:</label>
+<div id="r"></div>
+</main>
+
+<footer>Copyright &copy; 2026 James Hunt
+&lt;<a href="https://jameshunt.us">james hunt (.us)</a>&gt;
+</footer>
+<script>
+const idx_name = '_idx';
+const default_name = 'scratchpad';
+if (!(idx_name in window.localStorage)) {
+  window.localStorage.setItem(idx_name, default_name);
+}
+if (!(default_name in window.localStorage)) {
+  window.localStorage.setItem(default_name, `<mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+<mo>=</mo>
+<mi>cos</mi>
+<mi>x</mi>`);
+}
+document.querySelector('#t').value = window.localStorage.getItem(idx_name);
+window.localStorage.setItem('example:basic', `<mrow>
+  <mi>a</mi>
+  <mo>&InvisibleTimes;</mo>
+  <mi>x</mi>
+  <mo>+</mo>
+  <mi>b</mi>
+  <mo>=</mo>
+  <mi>c</mi>
+</mrow>`);
+
+window.localStorage.setItem('example:quadratic', `<mrow>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mfrac>
+    <mrow>
+      <mrow>
+        <mo>-</mo>
+        <mi>b</mi>
+      </mrow>
+      <mo>±</mo>
+      <msqrt>
+        <mrow>
+          <msup>
+            <mi>b</mi>
+            <mn>2</mn>
+          </msup>
+          <mo>-</mo>
+          <mrow>
+            <mn>4</mn>
+            <mo>⁢</mo>
+            <mi>a</mi>
+            <mo>⁢</mo>
+            <mi>c</mi>
+          </mrow>
+        </mrow>
+      </msqrt>
+    </mrow>
+    <mrow>
+      <mn>2</mn>
+      <mo>⁢</mo>
+      <mi>a</mi>
+    </mrow>
+  </mfrac>
+</mrow>`);
+
+window.localStorage.setItem('example:matrix', `<mi>R</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+<mo>=</mo>
+<mrow>
+ <mo>[</mo>
+  <mtable>
+    <mtr>
+       <mtd><mi>cos</mi><mi>x</mi></mtd>
+       <mtd><mo>-</mo><mi>sin</mi> <mi>x</mi></mtd>
+    </mtr>
+    <mtr>
+       <mtd><mi>sin</mi><mi>x</mi></mtd>
+       <mtd><mi>cos</mi><mi>x</mi></mtd>
+    </mtr>
+  </mtable>
+ <mo>]</mo>
+</mrow>`);
+
+window.localStorage.setItem('example:sum', `<mstyle displaystyle="true"> 
+  <munderover>
+    <mo>&sum;</mo>
+    <mn>1</mn>
+    <mn>2</mn>
+  </munderover>
+  <mfrac><mn>1</mn><mi>k</mi></mfrac>
+  <mo>=</mo>
+  <mn>1,5</mn>
+</mstyle>`);
+
+window.localStorage.setItem('example:complex', `<mi>&zeta;</mi> <mo>(</mo><mi>s</mi><mo>)</mo>
+ <mo>=</mo>
+ <munderover>
+   <mo>&sum;</mo>
+   <mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow>
+   <mi>&infin;</mi>
+ </munderover>
+ <mfrac>
+   <mn>1</mn>
+   <msup><mi>n</mi><mi>s</mi></msup>
+ </mfrac>
+ <mo>=</mo>
+ <munderover>
+   <mo>&prod;</mo>
+   <mrow><mi>p</mi><mo>&isin;</mo><mn>&primes;</mn></mrow>
+   <mn></mn>
+ </munderover>
+ <mfrac>
+   <mn>1</mn>
+   <mrow><mn>1</mn><mo>-</mo><msup><mi>p</mi><mrow><mo>-</mo><mi>s</mi></mrow></msup></mrow>
+ </mfrac>
+ <mo>=</mo>
+ <mfrac>
+   <mrow>
+     <msup><mn>e</mn><mrow><mo>-</mo><mn>i</mn><mn>&pi;</mn><mi>s</mi></mrow></msup>
+     <mn>&nbsp;</mn>
+     <mn>&Gamma;</mn><mo>(</mo><mn>1</mn><mo>-</mo><mi>s</mi><mo>)</mo>
+   </mrow>
+   <mrow>
+     <mn>2</mn><mn>&pi;</mn><mn>i</mn>
+   </mrow>
+ </mfrac>
+ <munderover>
+   <mo>&int;</mo>
+   <mi>C</mi>
+   <mn></mn>
+ </munderover>
+ <mfrac>
+   <mrow><msup><mi>z</mi><mrow><mi>s</mi><mo>-</mo><mn>1</mn></mrow></msup><mo>d</mo><mi>z</mi></mrow>
+   <mrow><msup><mn>e</mn><mi>z</mi></msup><mo>-</mo><mn>1</mn></mrow>
+ </mfrac>
+ <mn>&emsp;</mn><mn>&emsp;</mn>
+ <mo>(</mo><mi>s</mi><mo>&isin;</mo><mn>&complexes;</mn>
+ <mo>,</mo><mn>&nbsp;</mn>
+ <mo>Re</mo><mi>s</mi><mo>></mo><mn>1</mn>
+ <mo>)</mo>`);
+
+const react = () => {
+  const k = document.querySelector('#t').value;
+  const v = document.querySelector('#m').value;
+
+  const r = document.querySelector('#r');
+  const m = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+  m.innerHTML = v;
+  r.innerHTML = '';
+  r.appendChild(m);
+
+  window.localStorage.setItem(k, v);
+};
+document.querySelector('#m').addEventListener('change', react);
+
+const chtitle = () => {
+  const k = document.querySelector('#t').value;
+  const t = document.querySelector('#m');
+  console.log(t.value);
+  t.value = window.localStorage.getItem(k);
+  console.log(t.value);
+  react();
+};
+document.querySelector('#t').addEventListener('change', chtitle);
+chtitle();
+</script>
+</body>
+</html>

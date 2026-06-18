@@ -1,0 +1,9 @@
+#!/bin/bash
+set -eu
+
+docker run -d --name mathml-ed \
+  --restart=always \
+  -p 8495:80 \
+  -l com.huntprod.docker.route=math.home.huntprod.com \
+  -l com.huntprod.docker.port=8495 \
+  ${1:-filefrog/mathml-ed}
