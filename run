@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eu
 
+docker stop mathml-ed || true
+docker rm   mathml-ed || true
+
 docker run -d --name mathml-ed \
   --restart=always \
   -p 8495:80 \
