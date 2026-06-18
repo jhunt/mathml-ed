@@ -15,6 +15,9 @@ a {
 label {
   color: lime;
 }
+.cb label {
+  color: inherit;
+}
 input, textarea {
   outline: none;
   border: 1px solid #767;
@@ -56,6 +59,12 @@ label {
   min-height: 4em;
   font-size: 18pt;
 }
+.cb {
+  margin-bottom: 1em;
+}
+.cb label {
+  display: inline;
+}
 
 body {
   margin-bottom: 20pt;
@@ -79,6 +88,10 @@ footer {
 <input type="text" id="t">
 <label>write your mathmL in this big text box</label>
 <textarea id="m"></textarea>
+<div class="cb">
+  <input id="d" type="checkbox" checked>
+  <label>Standalone (block) style display</label>
+</div>
 <label>... and watch it render below:</label>
 <div id="r"></div>
 </main>
@@ -222,9 +235,11 @@ window.localStorage.setItem('example:complex', `<mi>&zeta;</mi> <mo>(</mo><mi>s<
 const react = () => {
   const k = document.querySelector('#t').value;
   const v = document.querySelector('#m').value;
+  const d = document.querySelector('#d').checked;
 
   const r = document.querySelector('#r');
   const m = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+  m.setAttribute('displaystyle', d ? 'true' : 'false');
   m.innerHTML = v;
   r.innerHTML = '';
   r.appendChild(m);
@@ -232,6 +247,7 @@ const react = () => {
   window.localStorage.setItem(k, v);
 };
 document.querySelector('#m').addEventListener('change', react);
+document.querySelector('#d').addEventListener('click', react);
 
 const chtitle = () => {
   const k = document.querySelector('#t').value;
