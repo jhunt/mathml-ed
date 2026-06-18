@@ -59,6 +59,16 @@ label {
   min-height: 4em;
   font-size: 18pt;
 }
+#c {
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  background-color: transparent;
+  color: inherit;
+  border-radius: 3pt;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
 .cb {
   margin-bottom: 1em;
 }
@@ -94,6 +104,7 @@ footer {
 </div>
 <label>... and watch it render below:</label>
 <div id="r"></div>
+<button id="c">copy</button>
 </main>
 
 <footer>Copyright &copy; 2026 James Hunt
@@ -259,6 +270,11 @@ const chtitle = () => {
 };
 document.querySelector('#t').addEventListener('change', chtitle);
 chtitle();
+
+document.querySelector('#c').addEventListener('click', ev => {
+  ev.preventDefault();
+  navigator.clipboard.writeText(JSON.stringify(window.localStorage));
+});
 </script>
 </body>
 </html>
