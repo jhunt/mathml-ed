@@ -253,9 +253,8 @@ document.querySelector('#d').addEventListener('click', react);
 const chtitle = () => {
   const k = document.querySelector('#t').value;
   const t = document.querySelector('#m');
-  console.log(t.value);
+  window.localStorage.setItem(idx_name, k);
   t.value = window.localStorage.getItem(k);
-  console.log(t.value);
   react();
 };
 document.querySelector('#t').addEventListener('change', chtitle);
